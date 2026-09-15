@@ -13,3 +13,6 @@ Initial project structure for learning, development, and VPS deployment.
 
 ## Development flow
 VS Code / ChatGPT -> GitHub -> VPS -> Nginx -> Internet
+
+## Deployment
+Pushes to the `main` branch are deployed to the VPS through GitHub Actions.
