@@ -1,0 +1,24 @@
+name: Check Muse bridge pilot
+on:
+  push:
+    branches: [infra/muse-agent]
+    paths:
+      - 'infra/muse-agent/**'
+      - '.github/workflows/muse-bridge-check.yml'
+  pull_request:
+    paths:
+      - 'infra/muse-agent/**'
+      - '.github/workflows/muse-bridge-check.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check installer syntax
+        run: bash -n infra/muse-agent/install-bridge.sh
+      - name: Test bridge with simulated worker
+        working-directory: infra/muse-agent
+        run: python3 -m unittest -v test_bridge.py
